@@ -1,8 +1,12 @@
+#include <cstdlib>
 #include <iostream>
+#include <fstream>
+#include <string>
 
-class Heap {
+using namespace std;
+struct Heap {
 private:
-	int elementos[];
+	int *elementos;
 	int cantElementos;
 	int capacidad;
 
@@ -19,9 +23,9 @@ private:
 	}
 
 	void Flotar(int pos) {
-		if (pos && elementos[Padre(i)] > elementos[pos])
+		if (pos && elementos[Padre(pos)] > elementos[pos])
 		{
-			swap(elementos[pos], elementos[Padre(pos)]);
+			swap(pos, Padre(pos));
 			Flotar(Padre(pos));
 		}
 	}
@@ -31,14 +35,20 @@ private:
 		int hijoDerecho = HijoDerecho(pos);
 
 		if (hijoIzquierdo < cantElementos && elementos[hijoIzquierdo] < elementos[pos]) {
-			swap(elementos[pos], elemetos[hijoIzquierdo]);
+			swap(pos, hijoIzquierdo);
 			Hundir(hijoIzquierdo);
 		}
 
 		if (hijoDerecho < cantElementos && elementos[hijoDerecho] < elementos[pos]) {
-			swap(elementos[pos], elementos[hijoDerecho]);
+			swap(pos, hijoDerecho);
 			Hundir(hijoDerecho);
 		}
+	}
+
+	void swap(int pos1, int pos2){
+		int aux = elementos[pos1];
+		elementos[pos1] = elementos[pos2];
+		elementos[pos2] = aux;
 	}
 
 public:
@@ -48,7 +58,7 @@ public:
 		capacidad = largo;
 	}
 
-	int Tamaño() {
+	int Tamano() {
 		return cantElementos;
 	}
 
@@ -57,14 +67,14 @@ public:
 	}
 
 	bool EsVacio() {
-		return Tamaño() == 0;
+		return Tamano() == 0;
 	}
 
 	bool EstaLLeno() {
-		return Tamaño() == Capacidad();
+		return Tamano() == Capacidad();
 	}
 
-	void Insertar(valor) {
+	void Insertar(int valor) {
 		elementos[cantElementos] = valor;
 		cantElementos++;
 
@@ -81,21 +91,36 @@ public:
 		cantElementos--;
 		Hundir(0);
 	}
+
+	~Heap(){
+		delete[] elementos;
+	}
 };
 
-void main() {
+int main() {
+
+  //// IMPORTANTE! BORRAR O COMENTAR LAS SIGUIENTES LINEAS  EN TODOS LOS EJERCICIOS DEL OBLIGATORIO. NO PUEDEN ESTAR EN NINGUNA ENTREGA!
+  //ifstream myFile("Pruebas/Ejercicio2/100000.in.txt");
+  //cin.rdbuf(myFile.rdbuf());
+  //Si desean tirar la salida a un archivo, usen las siguientes lÃ­neas (si no, sÃ¡quenlas):
+  //ofstream myFile2("Salidas/Ejercicio2.out.txt");
+  //cout.rdbuf(myFile2.rdbuf());
+
+
 	int largo;
 	int elemento;
 	cin >> largo;
-	Heap heap = new Heap(largo);
+	Heap heap = Heap(largo);
 
-	for (int i = 0; i <= largo; i++) {
+	for (int i = 0; i < largo; i++) {
 		cin >> elemento;
 		heap.Insertar(elemento);
 	}
 
-	while (heap.Tamaño() > 0) {
-		cout << heap.ObtenerElemento(0);
-		heap.EliminarElemento(0);
+	while (heap.Tamano() > 0) {
+		cout << heap.ObtenerElemento(0) << endl;
+		heap.EliminarElemento();
 	}
+	heap.~Heap();
+	return 0;
 }
