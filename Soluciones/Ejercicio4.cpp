@@ -70,15 +70,6 @@ class Grafo{
             }
             return retorno;
         }
-        void Imprimir(){
-            for (int i = 0; i < largo; i++){
-                cout << vertices[i] << endl;
-            }
-            for (int i = 0; i < largo; i++){
-                for (int j = 0; j < largo; j++)
-                    cout << matAdy[i][j] << endl;
-            }    
-        }
 
     private:
 
@@ -126,11 +117,11 @@ class Grafo{
 int main(){
 
   //// IMPORTANTE! BORRAR O COMENTAR LAS SIGUIENTES LINEAS  EN TODOS LOS EJERCICIOS DEL OBLIGATORIO. NO PUEDEN ESTAR EN NINGUNA ENTREGA!
-  ifstream myFile("Pruebas/Ejercicio4/100.in.txt");
-  cin.rdbuf(myFile.rdbuf());
+  //ifstream myFile("Pruebas/Ejercicio4/100.in.txt");
+  //cin.rdbuf(myFile.rdbuf());
   //Si desean tirar la salida a un archivo, usen las siguientes líneas (si no, sáquenlas):
-  ofstream myFile2("Salidas/Ejercicio4.out.txt");
-  cout.rdbuf(myFile2.rdbuf());
+  //ofstream myFile2("Salidas/Ejercicio4.out.txt");
+  //cout.rdbuf(myFile2.rdbuf());
 
     int largo;
     cin >> largo;
