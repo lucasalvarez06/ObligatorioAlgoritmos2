@@ -34,7 +34,7 @@ class Grafo{
 
         void insertarVertice(int v){
             int i = 0;
-            for(i; i < largo && ExistenVertices[i]; i++)
+            for(i; i < largo && ExistenVertices[i]; i++);
             vertices[i] = v;
             ExistenVertices[i] = true;
             cantElementos++;
@@ -44,8 +44,14 @@ class Grafo{
             //validar que exista origen y destino
             int posO = EncontrarVertice(o);
             int posD = EncontrarVertice(d);
-            if(posO == -1) insertarVertice(o);
-            if(posO == -1) insertarVertice(d);
+            if(posO == -1){
+                insertarVertice(o);
+                posO = EncontrarVertice(o);
+            }
+            if(posO == -1){
+                insertarVertice(d);
+                posD = EncontrarVertice(d);
+            }
             matAdy[posO][posD] = 1;          
         }
 
@@ -64,7 +70,7 @@ class Grafo{
             }
             return retorno;
         }
-        /*void Imprimir(){
+        void Imprimir(){
             for (int i = 0; i < largo; i++){
                 cout << vertices[i] << endl;
             }
@@ -72,7 +78,7 @@ class Grafo{
                 for (int j = 0; j < largo; j++)
                     cout << matAdy[i][j] << endl;
             }    
-        }*/
+        }
 
     private:
 
@@ -120,7 +126,7 @@ class Grafo{
 int main(){
 
   //// IMPORTANTE! BORRAR O COMENTAR LAS SIGUIENTES LINEAS  EN TODOS LOS EJERCICIOS DEL OBLIGATORIO. NO PUEDEN ESTAR EN NINGUNA ENTREGA!
-  ifstream myFile("Pruebas/Ejercicio4/10.in.txt");
+  ifstream myFile("Pruebas/Ejercicio4/100.in.txt");
   cin.rdbuf(myFile.rdbuf());
   //Si desean tirar la salida a un archivo, usen las siguientes líneas (si no, sáquenlas):
   ofstream myFile2("Salidas/Ejercicio4.out.txt");
@@ -137,8 +143,6 @@ int main(){
         cin >> a2;
         grafo.insertarArista(a1,a2);
     }
-
-    //grafo.Imprimir();
 
     if(grafo.EsTriconexo()){
         cout << 1 << endl;
