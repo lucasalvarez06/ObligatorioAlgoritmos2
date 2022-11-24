@@ -54,12 +54,13 @@ struct ArrayNumeros{
     int ObtenerMaxInt(){
         int retorno = 0;
         for (int i = 0; i < largo; i++){
-            retorno += array[i] * Potencia(10, i);
+            retorno = retorno + (array[i] * (Potencia(10, i)));
         }
+        return retorno;
     }
 
     int Potencia(int numero, int exponente){
-        if (exponente == 0) return numero;
+        if (exponente == 0) return 1;
         else return (numero * Potencia(numero, exponente - 1));
     }
 
@@ -68,7 +69,7 @@ struct ArrayNumeros{
 
 int main(){
     //// IMPORTANTE! BORRAR O COMENTAR LAS SIGUIENTES LINEAS  EN TODOS LOS EJERCICIOS DEL OBLIGATORIO. NO PUEDEN ESTAR EN NINGUNA ENTREGA!
-    //ifstream myFile("Pruebas/Ejercicio6/3.in.txt");
+    //ifstream myFile("Pruebas/Ejercicio10/9.in.txt");
     //cin.rdbuf(myFile.rdbuf());
     //Si desean tirar la salida a un archivo, usen las siguientes líneas (si no, sáquenlas):
     //ofstream myFile2("Salidas/Ejercicio10.out.txt");
